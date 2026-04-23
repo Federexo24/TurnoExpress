@@ -1,10 +1,10 @@
-package ar.salud.turnoexpress.principal;
+package ar.salud.turnoexpress;
 
 import java.util.Scanner;
 import ar.salud.turnoexpress.modelo.Paciente;
 import ar.salud.turnoexpress.modelo.Medico;
 import ar.salud.turnoexpress.modelo.Turno;
-import ar.salud.turnoexpress.modelo.Especialidad;
+import ar.salud.turnoexpress.enums.Especialidad;
 
 public class Principal {
 
@@ -29,7 +29,7 @@ public class Principal {
             System.out.println("[" + i + "] " + especialidades[i]);
         }
 
-        System.out.println("Seleccione una especialidad:");
+        System.out.println("Seleccione una especialidad eligiendo el numero:");
         int opcion = sc.nextInt();
 
         Especialidad elegida = Especialidad.values()[opcion];
