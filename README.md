@@ -20,10 +20,7 @@ El desarrollo es **incremental y público**: cada semana se incorporan nuevas fu
 |Semana 2|Nuevas clases, composición, Enum y array                |✅ Completada|
 
 -----
-
-## 🏗️ Arquitectura
-
-```
+🏗️ Arquitectura
 TurnoExpress/
 └── src/
     ├── ar.salud.turnoexpress.modelo/
@@ -34,10 +31,6 @@ TurnoExpress/
     ├── ar.salud.turnoexpress.principal/
     │   └── Principal.java         # Punto de entrada del programa
     └── module-info.java           # Configuración del módulo Java
-```
-
------
-
 ## ✨ Funcionalidades
 
 ### Semana 1
