@@ -1,39 +1,36 @@
 package ar.salud.turnoexpress;
 
-import java.util.Scanner;
 import ar.salud.turnoexpress.modelo.Paciente;
-import ar.salud.turnoexpress.modelo.Medico;
-import ar.salud.turnoexpress.modelo.Turno;
-import ar.salud.turnoexpress.enums.Especialidad;
+import ar.salud.turnoexpress.servicio.PacienteServicio;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
+@SpringBootApplication
 public class Principal {
 
     public static void main(String[] args) {
+        SpringApplication.run(Principal.class, args);
+    }
 
-        Scanner sc = new Scanner(System.in);
+    @Bean
+    public CommandLineRunner demo(PacienteServicio servicio) {
+        return args -> {
 
-        System.out.println("----BIENVENIDO/A A TurnoExpress---");
+            // Creamos y guardamos dos pacientes
+            Paciente p1 = new Paciente("Federico Adamo", "46013531");
+            Paciente p2 = new Paciente("María López", "38291045");
 
-        System.out.println("Por favor, ingrese su nombre y apellido:");
-        String nombre = sc.nextLine();
+            servicio.guardar(p1);
+            servicio.guardar(p2);
 
-        System.out.println("Por favor, ingrese su DNI:");
-        String dni = sc.nextLine();
+            System.out.println("=== Pacientes guardados en la base de datos ===");
 
-        Paciente paciente = new Paciente(nombre, dni);
-        paciente.mostrarDatos();
-
-        System.out.println("Especialidades disponibles:");
-        Especialidad[] especialidades = Especialidad.values();
-        for (int i = 0; i < especialidades.length; i++) {
-            System.out.println("[" + i + "] " + especialidades[i]);
-        }
-
-        System.out.println("Seleccione una especialidad eligiendo el numero:");
-        int opcion = sc.nextInt();
-
-        Especialidad elegida = Especialidad.values()[opcion];
-        Turno turno = new Turno(paciente, new Medico("Dr. García", elegida));
-        turno.mostrarDatos();
+            // Traemos todos los pacientes de la base de datos
+            servicio.listarTodos().forEach(p -> {
+                System.out.println("ID: " + p.getId() + " | Nombre: " + p.getNombre() + " | DNI: " + p.getDni());
+            });
+        };
     }
 }
